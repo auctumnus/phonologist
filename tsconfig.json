@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "ES2021",
+    "allowSyntheticDefaultImports": true
+  }
+}
