@@ -1,0 +1,48 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  skip_ci:
+    runs-on: ubuntu-latest
+    outputs:
+      canSkip: ${{ steps.check.outputs.canSkip }}
+    steps:
+      - id: check
+        uses: Legorooj/skip-ci@main
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x]
+    steps:
+      - uses: actions/checkout@v2
+
+      # setup node
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # setup pnpm
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.9.1
+          run_install: |
+            args: [--frozen-lockfile]
+      - run: pnpm run test:coverage
+      - run: pnpm run test:report

@@ -6,6 +6,7 @@
  */
 export const replaceAll =
   // @ts-ignore
+  /* c8 ignore next 5 */
   ''.replaceAll
     ? (str: string, find: string | RegExp, rep: string) =>
         str.replaceAll(find, rep)

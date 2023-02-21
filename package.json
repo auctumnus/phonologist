@@ -11,20 +11,25 @@
     "watch": "microbundle watch",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "test": "microbundle && uvu -r esm test",
-    "test:watch": "concurrently \"microbundle watch\" \"uvu -wr esm test\"",
+    "test": "microbundle && uvu -r tsm test",
+    "test:watch": "concurrently \"microbundle watch\" \"uvu -wr tsm test\"",
+    "test:coverage": "c8 --include=src uvu -r tsm test",
+    "test:report": "c8 report --reporter=text-lcov > coverage.lcov",
     "preinstall": "npx only-allow pnpm"
   },
   "author": "autumn",
   "license": "MIT",
   "devDependencies": {
     "@types/lodash-es": "^4.17.4",
+    "c8": "^7.13.0",
     "concurrently": "^6.2.0",
     "esbuild": "^0.13.15",
     "esm": "^3.2.25",
+    "microbundle": "^0.15.1",
     "micromatch": "^4.0.4",
     "prettier": "^2.3.2",
     "simple-git-hooks": "^2.5.1",
+    "tsm": "^2.3.0",
     "typescript": "^4.3.5",
     "uvu": "^0.5.1",
     "uvu-watch": "^1.0.11"
@@ -34,8 +39,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "microbundle": "^0.15.1"
-  }
+  ]
 }

@@ -1,6 +1,6 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
-import { parsePhoneme } from '../dist/phonologist.esm'
+import { parsePhoneme } from '../src'
 
 test('basic vowel', () => {
   const parsed = parsePhoneme('a')
@@ -36,6 +36,11 @@ test('terrifying diacritics', () => {
 
 test('er', () => {
   const parsed = parsePhoneme('ɚ')
+  assert.ok(parsed)
+})
+
+test('british er', () => {
+  const parsed = parsePhoneme('ɝ')
   assert.ok(parsed)
 })
 

@@ -1,5 +1,4 @@
 import phonemesjson from './phonemes.json'
-import { replaceAll } from '../replaceAll'
 
 // significant data (and code to represent it) taken from https://seaming.github.io
 // at permission from the author
