@@ -74,26 +74,38 @@ const allDiacritics = Object.keys(diacritics).join('')
  * @param s The string to remove diacritics from.
  * @returns The string without diacritics.
  */
-export const removeDiacritics = (s: string) =>
-  replaceAll(s, RegExp(`[${allDiacritics}]`, 'g'), '')
+export const removeDiacritics = (s: string) => {
+  s = s.normalize('NFD')
+  const cleaned = replaceAll(s, RegExp(`[${allDiacritics}]`, 'g'), '')
+  if (cleaned === 'ɚ') {
+    return 'ə'
+  } else if (cleaned === 'ɝ') {
+    return 'ɜ'
+  } else {
+    return cleaned
+  }
+}
 
 /**
  * Finds modifiers that exist in this string.
  * @param s An IPA string.
- * @returns
+ * @returns An array of modifier names
  */
 export const findModifiers = (s: string) => {
   // decompose string
   s = s.normalize('NFD')
   const base = removeDiacritics(s)
-  return Object.entries(diacritics)
-    .filter(
-      ([diacritic, modifier]) =>
+  return uniq(
+    Object.entries(diacritics)
+      .filter(([diacritic, modifier]) => {
+        let d = diacritic.replace('◌', '')
         // unicode should really decompose these, but i'm not on the board so
-        (modifier === 'rhotacized' && base === 'ɚ') ||
-        base === 'ɝ' ||
-        (isPostfix(diacritic) && s.indexOf(base) < s.indexOf(diacritic)) ||
-        (s.indexOf(diacritic) !== -1 && s.indexOf(diacritic) < s.indexOf(base))
-    )
-    .map(([_, v]) => v)
+        return (
+          (modifier === 'rhotacized' && (s === 'ɚ' || s === 'ɝ')) ||
+          (isPostfix(diacritic) && s.indexOf(base) < s.indexOf(d)) ||
+          (s.indexOf(d) !== -1 && s.indexOf(d) < s.indexOf(base))
+        )
+      })
+      .map(([_, v]) => v)
+  )
 }

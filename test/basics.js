@@ -20,11 +20,29 @@ test('basic consonant', () => {
 
 test('diacritics', () => {
   const parsed = parsePhoneme('á')
-  console.log(parsed)
+  assert.ok(parsed.modifiers.length)
+  assert.ok(parsed.modifiers.includes('high'))
+  assert.ok(parsed)
 })
 
 test('nonsense', () => {
   assert.not.ok(parsePhoneme('skjdfnsldfbksjd'))
+})
+
+test('terrifying diacritics', () => {
+  const parsed = parsePhoneme('ɣ̞ˤʵ') // google "Gooise R"
+  assert.ok(parsed)
+})
+
+test('er', () => {
+  const parsed = parsePhoneme('ɚ')
+  assert.ok(parsed)
+})
+
+test('prefixes', () => {
+  const parsed = parsePhoneme('ᵐb')
+  assert.ok(parsed.modifiers.includes('pre-nasalized'))
+  assert.ok(parsed)
 })
 
 test.run()
