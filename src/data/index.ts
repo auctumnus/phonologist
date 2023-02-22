@@ -40,7 +40,7 @@ export type VowelFeature = Height | Depth | 'round'
 
 export type Feature = ConsonantFeature | VowelFeature
 
-export const moas = [
+export const poas = [
   'bilabial',
   'labiodental',
   'dental',
@@ -53,7 +53,7 @@ export const moas = [
   'pharyngeal',
   'glottal',
 ] as Feature[]
-export const poas = [
+export const moas = [
   'nasal',
   'stop',
   'affricate',
