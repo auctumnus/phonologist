@@ -35,6 +35,11 @@ parsePhoneme('t')
 2. add modifiers to phonemes
 3. more docs
 
+## License
+
+MIT, but includes data and code compiled and written by [felix] for their 
+[phonology generator] / [phonology analyzer] (and associated projects)
+
 [npm]: https://www.npmjs.com/package/phonologist
 [npm-badge]: https://img.shields.io/npm/v/phonologist?style=flat-square
 [license]: https://github.com/auctumnus/phonologist/blob/main/LICENSE
@@ -43,3 +48,6 @@ parsePhoneme('t')
 [build-status-badge]: https://img.shields.io/github/actions/workflow/status/auctumnus/phonologist/main.yml?style=flat-square
 [phonemes]: https://en.wikipedia.org/wiki/Phoneme
 [international phonetic alphabet]: https://en.wikipedia.org/wiki/International_Phonetic_Alphabet
+[felix]: https://seaming.github.io
+[phonology generator]: https://seaming.github.io/generator/
+[phonology analyzer]: https://seaming.github.io/phonemes/
