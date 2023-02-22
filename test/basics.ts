@@ -50,4 +50,9 @@ test('prefixes', () => {
   assert.ok(parsed)
 })
 
+test('', () => {
+  const parsed = parsePhoneme('m')
+  assert.ok(parsed)
+})
+
 test.run()

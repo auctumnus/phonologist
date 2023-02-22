@@ -67,7 +67,12 @@ export const modifiers = uniq(Object.values(diacriticsjson)) as Modifier[]
 
 const isPostfix = (diacritic: string) => postfixes.includes(diacritic)
 
-const allDiacritics = Object.keys(diacritics).join('')
+const allDiacritics = RegExp(
+  Object.keys(diacritics)
+    .map((d) => d.replace('◌', ''))
+    .join('|'),
+  'g'
+)
 
 /**
  * Removes any recognized diacritics from a string.
@@ -76,7 +81,7 @@ const allDiacritics = Object.keys(diacritics).join('')
  */
 export const removeDiacritics = (s: string) => {
   s = s.normalize('NFD')
-  const cleaned = replaceAll(s, RegExp(`[${allDiacritics}]`, 'g'), '')
+  const cleaned = replaceAll(s, allDiacritics, '')
   if (cleaned === 'ɚ') {
     return 'ə'
   } else if (cleaned === 'ɝ') {
