@@ -6,6 +6,12 @@ interface Phoneme {
    * The IPA representation of this phoneme.
    */
   ipa: string
+
+  /**
+   * The base letter of this phoneme.
+   */
+  base: string
+
   /**
    * The feature list for this phoneme.
    */
@@ -40,6 +46,7 @@ export const parsePhoneme = (ipa: string) => {
   const modifiers = findModifiers(ipa)
   return Object.freeze({
     ipa,
+    base,
     features,
     modifiers,
     isVowel: vowel,

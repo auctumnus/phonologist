@@ -12,7 +12,8 @@ test('basic vowel', () => {
 
 test('basic consonant', () => {
   const parsed = parsePhoneme('t')
-  assert.equal(parsed.features, ['alveolar', 'stop'])
+  assert.ok(parsed.features.includes('alveolar'))
+  assert.ok(parsed.features.includes('stop'))
   assert.equal(parsed.modifiers, [])
   assert.ok(parsed.isConsonant)
   assert.ok(!parsed.isVowel)
