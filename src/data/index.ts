@@ -80,7 +80,7 @@ export const depths = [
   'back',
 ] as Feature[]
 
-export const features = [...moas, ...poas, ...heights, ...depths]
+export const features = [...moas, ...poas, ...heights, ...depths, 'round']
 
 export const phonemes = phonemesjson as Record<Feature, string[]>
 

@@ -56,4 +56,9 @@ test('', () => {
   assert.ok(parsed)
 })
 
+test('round vowel', () => {
+  const parsed = parsePhoneme('u')
+  assert.ok(parsed.features.includes('round'))
+})
+
 test.run()

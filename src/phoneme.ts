@@ -1,7 +1,7 @@
 import { Feature, phonemes, isVowel, getFeatures } from './data'
 import { removeDiacritics, findModifiers, Modifier } from './diacritics'
 
-interface Phoneme {
+export interface Phoneme {
   /**
    * The IPA representation of this phoneme.
    */
